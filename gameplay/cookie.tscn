@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkr2bq1l3qpe8"]
+
+[ext_resource type="Script" path="res://code/cookie.gd" id="1_5v0cm"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_olmpp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_flshj"]
+render_priority = 0
+shader = ExtResource("2_olmpp")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ov0k"]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_flshj")
+albedo_color = Color(0.233173, 0.68487, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_054an"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l8pp4"]
+size = Vector3(0.212402, 0.0784302, 0.191956)
+
+[node name="cookie" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66071, 0, -0.420867)
+script = ExtResource("1_5v0cm")
+
+[node name="model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.16, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3ov0k")
+mesh = SubResource("TorusMesh_054an")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00317383, 0.00515747, -0.0069885)
+shape = SubResource("BoxShape3D_l8pp4")
